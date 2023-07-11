@@ -1,35 +1,37 @@
-import React, { useEffect, useState } from "react";
-import MovieListHeading from "./Components/MovieListHeading";
-import SearchBox from "./Components/SearchBox";
+import React, { useState, useEffect } from "react";
+import MovieList from "./Components/MovieList";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import MovieList from "./Components/MovieList";
+import SearchBox from "./Components/SearchBox";
+import MovieHeading from "./Components/MovieHeading";
+import AddFavourite from "./Components/AddFavourites";
 
 const App = () => {
   const [movies, setMovies] = useState([]);
-  const [searchValue, setSearchValue] = useState('');
+  const [SearchValue, setSearchValue] = useState("");
 
-  const GetMoviesRequest = async (searchValue) => {
-    const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=6e91555c`;
+  const getMovieRequest = async (SearchValue) => {
+    const url = `http://www.omdbapi.com/?s=${SearchValue}&apikey=4e476b6f`;
     const response = await fetch(url);
-    const responseJson = await response.json();
-    if (responseJson.Search) {
-      setMovies(responseJson.Search);
+    const responseJSON = await response.json();
+
+    if (responseJSON.Search) {
+      setMovies(responseJSON.Search);
     }
   };
 
   useEffect(() => {
-    GetMoviesRequest(searchValue);
-  }, [searchValue]);
-  
+    getMovieRequest(SearchValue);
+  }, [SearchValue]);
+
   return (
     <div className="container-fluid movie-app">
       <div className="row d-flex align-items-center mt-4 mb-4">
-        <MovieListHeading heading="Movies" />
-        <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
+        <MovieHeading heading="Movies" />
+        <SearchBox SearchValue={SearchValue} setSearchValue={setSearchValue} />
       </div>
       <div className="row">
-        <MovieList movies={movies} />
+        <MovieList movies={movies} favComp={AddFavourite} />
       </div>
     </div>
   );
