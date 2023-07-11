@@ -3,7 +3,11 @@ import MovieList from "./Components/MovieList";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import SearchBox from "./Components/SearchBox";
+<<<<<<< HEAD
 import MovieListHeading from "./Components/MovieListHeading";
+=======
+import MovieHeading from "./Components/MovieListHeading";
+>>>>>>> ab1214b7f9ff93018d3458c959aa8801eae02d5a
 import AddFavourite from "./Components/AddFavourites";
 
 const App = () => {
