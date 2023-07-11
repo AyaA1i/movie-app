@@ -1,6 +1,5 @@
 import React from "react";
 
-
 const MovieList = (data) => {
   console.log(data.movies);
   const FavouriteComponent = data.favComp;
