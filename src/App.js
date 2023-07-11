@@ -1,269 +1,33 @@
-import React, { useState } from "react";
-import MovieList from "./Components/MovieList";
+import React, { useEffect, useState } from "react";
+import MovieListHeading from "./Components/MovieListHeading";
+import SearchBox from "./Components/SearchBox";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import MovieList from "./Components/MovieList";
 
 const App = () => {
-  const [movies, setMovies] = useState([
-    {
-      Title: "Guardians of the Galaxy Vol. 2",
-      Year: "2017",
-      Rated: "PG-13",
-      Released: "05 May 2017",
-      Runtime: "136 min",
-      Genre: "Action, Adventure, Comedy",
-      Director: "James Gunn",
-      Writer: "James Gunn, Dan Abnett, Andy Lanning",
-      Actors: "Chris Pratt, Zoe Saldana, Dave Bautista",
-      Plot: "The Guardians struggle to keep together as a team while dealing with their personal family issues, notably Star-Lord's encounter with his father, the ambitious celestial being Ego.",
-      Language: "English",
-      Country: "United States",
-      Awards: "Nominated for 1 Oscar. 15 wins & 60 nominations total",
-      Poster:
-        "https://m.media-amazon.com/images/M/MV5BNjM0NTc0NzItM2FlYS00YzEwLWE0YmUtNTA2ZWIzODc2OTgxXkEyXkFqcGdeQXVyNTgwNzIyNzg@._V1_SX300.jpg",
-      Ratings: [
-        { Source: "Internet Movie Database", Value: "7.6/10" },
-        { Source: "Rotten Tomatoes", Value: "85%" },
-        { Source: "Metacritic", Value: "67/100" },
-      ],
-      Metascore: "67",
-      imdbRating: "7.6",
-      imdbVotes: "719,971",
-      imdbID: "tt3896198",
-      Type: "movie",
-      DVD: "22 Aug 2017",
-      BoxOffice: "$389,813,101",
-      Production: "N/A",
-      Website: "N/A",
-      Response: "True",
-    },
-    {
-      Title: "Divergent",
-      Year: "2014",
-      Rated: "PG-13",
-      Released: "21 Mar 2014",
-      Runtime: "139 min",
-      Genre: "Action, Adventure, Mystery",
-      Director: "Neil Burger",
-      Writer: "Evan Daugherty, Vanessa Taylor, Veronica Roth",
-      Actors: "Shailene Woodley, Theo James, Kate Winslet",
-      Plot: "In a world divided by factions based on virtues, Tris learns she's Divergent and won't fit in. When she discovers a plot to destroy Divergents, Tris and the mysterious Four must find out what makes Divergents dangerous before it's...",
-      Language: "English, Spanish",
-      Country: "United States",
-      Awards: "7 wins & 11 nominations",
-      Poster:
-        "https://m.media-amazon.com/images/M/MV5BMTYxMzYwODE4OV5BMl5BanBnXkFtZTgwNDE5MzE2MDE@._V1_SX300.jpg",
-      Ratings: [
-        { Source: "Internet Movie Database", Value: "6.6/10" },
-        { Source: "Rotten Tomatoes", Value: "41%" },
-        { Source: "Metacritic", Value: "48/100" },
-      ],
-      Metascore: "48",
-      imdbRating: "6.6",
-      imdbVotes: "473,097",
-      imdbID: "tt1840309",
-      Type: "movie",
-      DVD: "05 Aug 2014",
-      BoxOffice: "$150,947,895",
-      Production: "N/A",
-      Website: "N/A",
-      Response: "True",
-    },
-    {
-      Title: "Missing",
-      Year: "2023",
-      Rated: "PG-13",
-      Released: "20 Jan 2023",
-      Runtime: "111 min",
-      Genre: "Drama, Mystery, Thriller",
-      Director: "Nicholas D. Johnson, Will Merrick",
-      Writer: "Will Merrick, Nicholas D. Johnson, Sev Ohanian",
-      Actors: "Tim Griffin, Ava Zaria Lee, Nia Long",
-      Plot: "After her mother goes missing, a young woman tries to find her from home, using tools available to her online.",
-      Language: "English, Spanish",
-      Country: "United States",
-      Awards: "N/A",
-      Poster:
-        "https://m.media-amazon.com/images/M/MV5BNWExMzg3NjAtZmZmYy00MWE3LWJkNjEtOTYzYTZjYTZkMjZiXkEyXkFqcGdeQXVyMTA3MDk2NDg2._V1_SX300.jpg",
-      Ratings: [
-        { Source: "Internet Movie Database", Value: "7.1/10" },
-        { Source: "Metacritic", Value: "66/100" },
-      ],
-      Metascore: "66",
-      imdbRating: "7.1",
-      imdbVotes: "39,679",
-      imdbID: "tt10855768",
-      Type: "movie",
-      DVD: "N/A",
-      BoxOffice: "$32,502,025",
-      Production: "N/A",
-      Website: "N/A",
-      Response: "True",
-    },
-    {
-      Title: "Top Gun",
-      Year: "1986",
-      Rated: "PG",
-      Released: "16 May 1986",
-      Runtime: "109 min",
-      Genre: "Action, Drama",
-      Director: "Tony Scott",
-      Writer: "Jim Cash, Jack Epps Jr., Ehud Yonay",
-      Actors: "Tom Cruise, Tim Robbins, Kelly McGillis",
-      Plot: "As students at the United States Navy's elite fighter weapons school compete to be best in the class, one daring young pilot learns a few things from a civilian instructor that are not taught in the classroom.",
-      Language: "English",
-      Country: "United States",
-      Awards: "Won 1 Oscar. 11 wins & 6 nominations total",
-      Poster:
-        "https://m.media-amazon.com/images/M/MV5BZjQxYTA3ODItNzgxMy00N2Y2LWJlZGMtMTRlM2JkZjI1ZDhhXkEyXkFqcGdeQXVyNDk3NzU2MTQ@._V1_SX300.jpg",
-      Ratings: [
-        { Source: "Internet Movie Database", Value: "6.9/10" },
-        { Source: "Rotten Tomatoes", Value: "58%" },
-        { Source: "Metacritic", Value: "50/100" },
-      ],
-      Metascore: "50",
-      imdbRating: "6.9",
-      imdbVotes: "477,520",
-      imdbID: "tt0092099",
-      Type: "movie",
-      DVD: "20 Oct 1998",
-      BoxOffice: "$180,258,178",
-      Production: "N/A",
-      Website: "N/A",
-      Response: "True",
-    },
-    {
-      Title: "The Woman in the Window",
-      Year: "2021",
-      Rated: "R",
-      Released: "14 May 2021",
-      Runtime: "100 min",
-      Genre: "Crime, Drama, Mystery",
-      Director: "Joe Wright",
-      Writer: "Tracy Letts, A.J. Finn",
-      Actors: "Amy Adams, Gary Oldman, Anthony Mackie",
-      Plot: "An agoraphobic woman living alone in New York begins spying on her new neighbors, only to witness a disturbing act of violence.",
-      Language: "English",
-      Country: "United States",
-      Awards: "6 nominations",
-      Poster:
-        "https://m.media-amazon.com/images/M/MV5BYmVlNWJkZWYtYmJkMy00YTZlLTgwODMtZjVmOGMzMmM1ZTk2XkEyXkFqcGdeQXVyMTAyMjQ3NzQ1._V1_SX300.jpg",
-      Ratings: [
-        { Source: "Internet Movie Database", Value: "5.7/10" },
-        { Source: "Rotten Tomatoes", Value: "25%" },
-        { Source: "Metacritic", Value: "41/100" },
-      ],
-      Metascore: "41",
-      imdbRating: "5.7",
-      imdbVotes: "79,262",
-      imdbID: "tt6111574",
-      Type: "movie",
-      DVD: "14 May 2021",
-      BoxOffice: "N/A",
-      Production: "N/A",
-      Website: "N/A",
-      Response: "True",
-    },
-    {
-      Title: "Red Notice",
-      Year: "2021",
-      Rated: "PG-13",
-      Released: "12 Nov 2021",
-      Runtime: "118 min",
-      Genre: "Action, Comedy, Thriller",
-      Director: "Rawson Marshall Thurber",
-      Writer: "Rawson Marshall Thurber",
-      Actors: "Dwayne Johnson, Ryan Reynolds, Gal Gadot",
-      Plot: "An Interpol agent successfully tracks down the world's most wanted art thief with help from a rival thief. But nothing is as it seems as a series of double-crosses ensues.",
-      Language: "English, Russian, Italian, Spanish, Indonesian",
-      Country: "United States",
-      Awards: "1 nomination",
-      Poster:
-        "https://m.media-amazon.com/images/M/MV5BZmRjODgyMzEtMzIxYS00OWY2LTk4YjUtMGMzZjMzMTZiN2Q0XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg",
-      Ratings: [
-        { Source: "Internet Movie Database", Value: "6.3/10" },
-        { Source: "Rotten Tomatoes", Value: "36%" },
-        { Source: "Metacritic", Value: "37/100" },
-      ],
-      Metascore: "37",
-      imdbRating: "6.3",
-      imdbVotes: "293,329",
-      imdbID: "tt7991608",
-      Type: "movie",
-      DVD: "12 Nov 2021",
-      BoxOffice: "N/A",
-      Production: "N/A",
-      Website: "N/A",
-      Response: "True",
-    },
-    {
-      Title: "The Maze Runner",
-      Year: "2014",
-      Rated: "PG-13",
-      Released: "19 Sep 2014",
-      Runtime: "113 min",
-      Genre: "Action, Mystery, Sci-Fi",
-      Director: "Wes Ball",
-      Writer: "Noah Oppenheim, Grant Pierce Myers, T.S. Nowlin",
-      Actors: "Dylan O'Brien, Kaya Scodelario, Will Poulter",
-      Plot: 'Thomas is deposited in a community of boys after his memory is erased, soon learning they\'re all trapped in a maze that will require him to join forces with fellow "runners" for a shot at escape.',
-      Language: "English",
-      Country: "United Kingdom, United States",
-      Awards: "4 wins & 12 nominations",
-      Poster:
-        "https://m.media-amazon.com/images/M/MV5BMjUyNTA3MTAyM15BMl5BanBnXkFtZTgwOTEyMTkyMjE@._V1_SX300.jpg",
-      Ratings: [
-        { Source: "Internet Movie Database", Value: "6.8/10" },
-        { Source: "Rotten Tomatoes", Value: "65%" },
-        { Source: "Metacritic", Value: "57/100" },
-      ],
-      Metascore: "57",
-      imdbRating: "6.8",
-      imdbVotes: "486,226",
-      imdbID: "tt1790864",
-      Type: "movie",
-      DVD: "16 Dec 2014",
-      BoxOffice: "$102,427,862",
-      Production: "N/A",
-      Website: "N/A",
-      Response: "True",
-    },
-    {
-      Title: "The Hunger Games",
-      Year: "2012",
-      Rated: "PG-13",
-      Released: "23 Mar 2012",
-      Runtime: "142 min",
-      Genre: "Action, Adventure, Sci-Fi",
-      Director: "Gary Ross",
-      Writer: "Gary Ross, Suzanne Collins, Billy Ray",
-      Actors: "Jennifer Lawrence, Josh Hutcherson, Liam Hemsworth",
-      Plot: "Katniss Everdeen voluntarily takes her younger sister's place in the Hunger Games: a televised competition in which two teenagers from each of the twelve Districts of Panem are chosen at random to fight to the death.",
-      Language: "English",
-      Country: "United States",
-      Awards: "Won 1 BAFTA Award33 wins & 48 nominations total",
-      Poster:
-        "https://m.media-amazon.com/images/M/MV5BMjA4NDg3NzYxMF5BMl5BanBnXkFtZTcwNTgyNzkyNw@@._V1_SX300.jpg",
-      Ratings: [
-        { Source: "Internet Movie Database", Value: "7.2/10" },
-        { Source: "Rotten Tomatoes", Value: "84%" },
-        { Source: "Metacritic", Value: "68/100" },
-      ],
-      Metascore: "68",
-      imdbRating: "7.2",
-      imdbVotes: "952,048",
-      imdbID: "tt1392170",
-      Type: "movie",
-      DVD: "18 Aug 2012",
-      BoxOffice: "$408,010,692",
-      Production: "N/A",
-      Website: "N/A",
-      Response: "True",
-    },
-  ]);
+  const [movies, setMovies] = useState([]);
+  const [searchValue, setSearchValue] = useState('');
 
+  const GetMoviesRequest = async (searchValue) => {
+    const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=6e91555c`;
+    const response = await fetch(url);
+    const responseJson = await response.json();
+    if (responseJson.Search) {
+      setMovies(responseJson.Search);
+    }
+  };
+
+  useEffect(() => {
+    GetMoviesRequest(searchValue);
+  }, [searchValue]);
+  
   return (
     <div className="container-fluid movie-app">
+      <div className="row d-flex align-items-center mt-4 mb-4">
+        <MovieListHeading heading="Movies" />
+        <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
+      </div>
       <div className="row">
         <MovieList movies={movies} />
       </div>
