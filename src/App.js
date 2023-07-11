@@ -3,7 +3,7 @@ import MovieList from "./Components/MovieList";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import SearchBox from "./Components/SearchBox";
-import MovieHeading from "./Components/MovieHeading";
+import MovieListHeading from "./Components/MovieListHeading";
 import AddFavourite from "./Components/AddFavourites";
 
 const App = () => {
@@ -27,7 +27,7 @@ const App = () => {
   return (
     <div className="container-fluid movie-app">
       <div className="row d-flex align-items-center mt-4 mb-4">
-        <MovieHeading heading="Movies" />
+        <MovieListHeading heading="Movies" />
         <SearchBox SearchValue={SearchValue} setSearchValue={setSearchValue} />
       </div>
       <div className="row">

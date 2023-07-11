@@ -1,5 +1,5 @@
 import React from "react";
-import NA from "./NA.png";
+
 
 const MovieList = (data) => {
   console.log(data.movies);
