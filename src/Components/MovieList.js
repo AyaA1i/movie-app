@@ -1,14 +1,30 @@
 import React from "react";
-//4e476b6f
+import NA from "./NA.png";
+
 const MovieList = (data) => {
+  console.log(data.movies);
+  const FavouriteComponent = data.favComp;
+
+  function check(poster) {
+    if (poster !== "N/A") return true;
+    else return false;
+  }
   return (
     <div className="d-flex justify-content-between">
       {data.movies.map((movie, index) => (
-        <div className="m-3">
-          <img src={movie.Poster} alt="movie-poster"></img>
+        <div className="image-container m-3" key={index}>
+          {check(movie.Poster) && (
+            <>
+              <img src={movie.Poster} />
+              <div className="overlay d-flex align-items-center justify-content-center">
+                <FavouriteComponent />
+              </div>
+            </>
+          )}
         </div>
       ))}
     </div>
   );
 };
+
 export default MovieList;
