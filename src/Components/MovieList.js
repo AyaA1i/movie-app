@@ -15,7 +15,8 @@ const MovieList = (data) => {
           {check(movie.Poster) && (
             <>
               <img src={movie.Poster} />
-              <div className="overlay d-flex align-items-center justify-content-center">
+              <div onClick = {()=>data.handleFavouritesClick(movie)} 
+              className="overlay d-flex align-items-center justify-content-center">
                 <FavouriteComponent />
               </div>
             </>
