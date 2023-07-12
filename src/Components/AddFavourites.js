@@ -3,7 +3,10 @@ import React from "react";
 const AddFavourite = () => {
   return (
     <div>
-      <span className="mr-2" style={{ verticalAlign: "middle" }}>
+      <span
+        className="mr-2"
+        style={{ verticalAlign: "middle", color: "rgb(255, 210, 80)" }}
+      >
         Add to Favourites{" "}
       </span>
       <svg

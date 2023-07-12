@@ -1,0 +1,15 @@
+.image-container {
+   
+}
+
+.description {
+    margin: 0;
+    font-size: 15px;
+}
+
+.movie-title,
+.rate {
+    font-weight: bold;
+    font-size: 15px;
+    margin: 0;
+}
