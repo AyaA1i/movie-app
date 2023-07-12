@@ -1,5 +1,5 @@
 # FlixHub App
-this app provide a comprehensive and user-friendly web application for browsing and discovering movies and series.
+this app provides a comprehensive and user-friendly web application for browsing and discovering movies and series.
 
 Features:
 
