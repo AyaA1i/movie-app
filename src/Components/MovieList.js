@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./MovieList.css";
 
 const MovieList = (data) => {
-  console.log(data.movies);
   const FavouriteComponent = data.favComp;
   const filteredMovies = data.movies.filter((movie) => movie.Poster !== "N/A");
 

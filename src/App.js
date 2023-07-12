@@ -302,7 +302,9 @@ const App = () => {
   const [movies, setMovies] = useState(staticmovies);
   const [SearchValue, setSearchValue] = useState("");
   const [favourites, setFavourites] = useState([]);
-
+  const SetLocalStorageFavourites = (items) => {
+    localStorage.setItem("Favourites", JSON.stringify(items));
+  };
   const getMovieRequest = async (SearchValue) => {
     if (SearchValue.trim() === "") {
       setMovies(staticmovies);
@@ -320,10 +322,20 @@ const App = () => {
     getMovieRequest(SearchValue);
   }, [SearchValue]);
 
+  useEffect(() => {
+    const MovieFav = JSON.parse(localStorage.getItem("Favourites"));
+    setFavourites(MovieFav);
+  });
   const AddFavouriteMovie = (Movie) => {
-    if (!favourites.includes(Movie)) {
+    const storedFavourites = JSON.parse(localStorage.getItem("Favourites"));
+
+    if (
+      !storedFavourites ||
+      !storedFavourites.some((item) => item.imdbID === Movie.imdbID)
+    ) {
       const newFavList = [...favourites, Movie];
       setFavourites(newFavList);
+      SetLocalStorageFavourites(newFavList);
     }
   };
 
@@ -332,6 +344,7 @@ const App = () => {
       (favourite) => favourite.imdbID !== Movie.imdbID
     );
     setFavourites(newFavList);
+    SetLocalStorageFavourites(newFavList);
   };
   return (
     <div className="container-fluid movie-app">
