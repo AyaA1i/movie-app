@@ -1,14 +1,12 @@
-.image-container {
-   
-}
-
 .description {
     margin: 0;
     font-size: 15px;
 }
 
 .movie-title,
-.rate {
+.rate, .movie-type,
+.movie-duration,
+.movie-release {
     font-weight: bold;
     font-size: 15px;
     margin: 0;

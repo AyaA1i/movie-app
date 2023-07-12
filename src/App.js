@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import SearchBox from "./Components/SearchBox";
 import MovieListHeading from "./Components/MovieListHeading";
-import AddFavourite from "./Components/AddFavourites";
+import AddFavourites from "./Components/AddFavourites";
 import RemoveFavourites from "./Components/RemoveFavourites";
 import Logo from "./Components/FlixHubLogo.png";
 
@@ -305,11 +305,12 @@ const App = () => {
   const SetLocalStorageFavourites = (items) => {
     localStorage.setItem("Favourites", JSON.stringify(items));
   };
+
   const getMovieRequest = async (SearchValue) => {
     if (SearchValue.trim() === "") {
       setMovies(staticmovies);
     }
-    const url = `http://www.omdbapi.com/?s=${SearchValue}&apikey=4e476b6f`;
+    const url = `http://www.omdbapi.com/?s=${SearchValue}&apikey=4e476b6f&Plot=full&r=json`;
     const response = await fetch(url);
     const responseJSON = await response.json();
 
@@ -320,20 +321,18 @@ const App = () => {
 
   useEffect(() => {
     getMovieRequest(SearchValue);
-  }, [SearchValue]);
-
-  useEffect(() => {
     const MovieFav = JSON.parse(localStorage.getItem("Favourites"));
     setFavourites(MovieFav);
-  });
-  const AddFavouriteMovie = (Movie) => {
+  }, [SearchValue]);
+
+  const AddFavouriteMovie = (movie) => {
     const storedFavourites = JSON.parse(localStorage.getItem("Favourites"));
 
     if (
       !storedFavourites ||
-      !storedFavourites.some((item) => item.imdbID === Movie.imdbID)
+      !storedFavourites.some((item) => item.imdbID === movie.imdbID)
     ) {
-      const newFavList = [...favourites, Movie];
+      const newFavList = [...favourites, movie];
       setFavourites(newFavList);
       SetLocalStorageFavourites(newFavList);
     }
@@ -346,6 +345,7 @@ const App = () => {
     setFavourites(newFavList);
     SetLocalStorageFavourites(newFavList);
   };
+
   return (
     <div className="container-fluid movie-app">
       <div className="d-flex align-items-center justify-content-between mt-4 mb-4">
@@ -361,7 +361,7 @@ const App = () => {
         <MovieList
           movies={movies}
           handleFavouritesClick={AddFavouriteMovie}
-          favComp={AddFavourite}
+          favComp={AddFavourites}
         />
       </div>
       {favourites.length > 0 && (
