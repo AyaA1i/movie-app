@@ -1,4 +1,5 @@
 ## FlixHub App
+
 This app provides a comprehensive and user-friendly web application for browsing and discovering movies and series.
 
 #Features:
@@ -7,6 +8,6 @@ Browse and Search: The app allows users to browse through a vast collection of m
 
 Movie Details: Upon hovering a movie, users can access detailed information about the film, including its description, release date and duration.
 
-Favorites and Watchlist: The app allows users to create a personalized collection of favourite movies by adding them to their favorites list or Watchlist.
+Favourites and Watchlist: The app allows users to create a personalized collection of favourite movies by adding them to their favourites list or Watchlist.
 
 Integration with The Open Movie Database (OMDb): The app utilizes the OMDb API to fetch movie data, including details, ratings, reviews and posters.
