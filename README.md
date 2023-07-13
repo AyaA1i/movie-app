@@ -9,4 +9,4 @@ Favorites: The app allows users to create a personalized collection of favorite 
 
 Watchlist: The app allows users to add and remove movies/series from their watchlist.
 
-Integration with The Movie Database (TMDb): The App utilizes the TMDb API to fetch movies and series data from INDB database.
+Integration with The Open Movie Database (OMDb): The app utilizes the OMDb API to fetch movies and series data from IMDb database.
