@@ -9,4 +9,4 @@ Movie Details: Upon hovering a movie, users can access detailed information abou
 
 Favorites and Watchlist: The App allows users to create a personalized collection of favorite movies by adding them to their favorites list or Watchlist.
 
-Integration with The Movie Database (OMDb): The App utilizes the TMDb API to fetch movie data, including details, ratings, reviews and posters.
+Integration with The Movie Database (OMDb): The App utilizes the OMDb API to fetch movie data, including details, ratings, reviews and posters.
