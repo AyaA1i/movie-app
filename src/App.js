@@ -392,9 +392,9 @@ const App = () => {
           handleWatchClick={AddWatchMovie}
           favComp={AddFavourites}
           watchComp={AddWatchList}
-        />
+          />
       </div>
-      {favourites.length > 0 && (
+      {favourites && favourites.length > 0 && (
         <>
           <div className="row d-flex align-items-center mt-4 mb-4">
             <MovieListHeading heading="Favourites" />
@@ -408,7 +408,7 @@ const App = () => {
           </div>
         </>
       )}
-      {watchlist.length > 0 && (
+      {watchlist && watchlist.length > 0 && (
         <>
           <div className="row d-flex align-items-center mt-4 mb-4">
             <MovieListHeading heading="Watchlist" />
