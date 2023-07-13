@@ -11,3 +11,24 @@
     font-size: 15px;
     margin: 0;
 }
+.FavButton{
+    height:20px;
+    width: 190px;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    margin-left: 30px;
+    border-radius: 5px;
+    border-width: 0px;
+    background-color: rgba(0, 0, 0, 0.474);
+}
+.WatchButton{
+    height:20px;
+    width: 190px;
+    display: block;
+    margin-left: 30px;
+    border-radius: 5px;
+    border-width: 0px;
+    background-color: rgba(0, 0, 0, 0.474);
+
+}

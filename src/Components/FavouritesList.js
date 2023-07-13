@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./MovieList.css";
 
-const MovieList = (data) => {
+const FavouriteList = (data) => {
   const FavouriteComponent = data.favComp;
-  const WatchListComponent = data.watchComp;
   const filteredMovies = data.movies.filter((movie) => movie.Poster !== "N/A");
   const [movieDetails, setMovieDetails] = useState({});
 
@@ -37,13 +36,6 @@ const MovieList = (data) => {
   const handleMouseLeave = () => {
     setHoveredIndex(null);
   };
-
-  const FavClicked = (movie) => {
-    data.handleFavouritesClick(movie);
-  };
-  const WatchClicked = (movie) => {
-    data.handleWatchClick(movie);
-  };
   return (
     <div className="d-flex ">
       {filteredMovies.map((movie, index) => {
@@ -66,15 +58,13 @@ const MovieList = (data) => {
                 <p className="movie-release">Release: {details.Released}</p>
                 <p className="description">{details.Plot}</p>
                 <p className="rate">Rate: {details.imdbRating}</p>
-                <button className="FavButton" onClick={() => FavClicked(movie)}>
-                  <FavouriteComponent />
-                </button>
-                <button
-                  className="WatchButton"
-                  onClick={() => WatchClicked(movie)}
+
+                <div
+                  onClick={() => data.handleFavouritesClick(movie)}
+                  className="overlay-content d-flex align-items-center justify-content-center"
                 >
-                  <WatchListComponent />
-                </button>
+                  <FavouriteComponent />
+                </div>
               </div>
             )}
           </div>
@@ -84,4 +74,4 @@ const MovieList = (data) => {
   );
 };
 
-export default MovieList;
+export default FavouriteList;

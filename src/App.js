@@ -6,7 +6,11 @@ import SearchBox from "./Components/SearchBox";
 import MovieListHeading from "./Components/MovieListHeading";
 import AddFavourites from "./Components/AddFavourites";
 import RemoveFavourites from "./Components/RemoveFavourites";
+import AddWatchList from "./Components/AddWatchList";
+import RemoveWatchList from "./Components/RemoveWatchList";
 import Logo from "./Components/FlixHubLogo.png";
+import FavouriteList from "./Components/FavouritesList";
+import WatchList from "./Components/WatchList";
 
 const App = () => {
   const staticmovies = [
@@ -302,8 +306,12 @@ const App = () => {
   const [movies, setMovies] = useState(staticmovies);
   const [SearchValue, setSearchValue] = useState("");
   const [favourites, setFavourites] = useState([]);
-  const SetLocalStorageFavourites = (items) => {
+  const [watchlist, setWatchlist] = useState([]);
+  const setLocalStorageFavourites = (items) => {
     localStorage.setItem("Favourites", JSON.stringify(items));
+  };
+  const setLocalStorageWatchlist = (items) => {
+    localStorage.setItem("Watchlist", JSON.stringify(items));
   };
 
   const getMovieRequest = async (SearchValue) => {
@@ -323,6 +331,8 @@ const App = () => {
     getMovieRequest(SearchValue);
     const MovieFav = JSON.parse(localStorage.getItem("Favourites"));
     setFavourites(MovieFav);
+    const MovieList = JSON.parse(localStorage.getItem("Favourites"));
+    setWatchlist(MovieList);
   }, [SearchValue]);
 
   const AddFavouriteMovie = (movie) => {
@@ -334,18 +344,36 @@ const App = () => {
     ) {
       const newFavList = [...favourites, movie];
       setFavourites(newFavList);
-      SetLocalStorageFavourites(newFavList);
+      setLocalStorageFavourites(newFavList);
+    }
+  };
+  const AddWatchMovie = (movie) => {
+    const storedWatchlist = JSON.parse(localStorage.getItem("Watchlist"));
+
+    if (
+      !storedWatchlist ||
+      !storedWatchlist.some((item) => item.imdbID === movie.imdbID)
+    ) {
+      const newWatchlist = [...watchlist, movie];
+      setWatchlist(newWatchlist);
+      setLocalStorageWatchlist(newWatchlist);
     }
   };
 
-  const RemoveFavouriteMovie = (Movie) => {
+  const RemoveFavouriteMovie = (movie) => {
     const newFavList = favourites.filter(
-      (favourite) => favourite.imdbID !== Movie.imdbID
+      (favourite) => favourite.imdbID !== movie.imdbID
     );
     setFavourites(newFavList);
-    SetLocalStorageFavourites(newFavList);
+    setLocalStorageFavourites(newFavList);
   };
-
+  const RemoveWatchMovie = (movie) => {
+    const newWatchlist = watchlist.filter(
+      (watch) => watch.imdbID !== movie.imdbID
+    );
+    setWatchlist(newWatchlist);
+    setLocalStorageWatchlist(newWatchlist);
+  };
   return (
     <div className="container-fluid movie-app">
       <div className="d-flex align-items-center justify-content-between mt-4 mb-4">
@@ -361,7 +389,9 @@ const App = () => {
         <MovieList
           movies={movies}
           handleFavouritesClick={AddFavouriteMovie}
+          handleWatchClick={AddWatchMovie}
           favComp={AddFavourites}
+          watchComp={AddWatchList}
         />
       </div>
       {favourites.length > 0 && (
@@ -370,10 +400,24 @@ const App = () => {
             <MovieListHeading heading="Favourites" />
           </div>
           <div className="row">
-            <MovieList
+            <FavouriteList
               movies={favourites}
               handleFavouritesClick={RemoveFavouriteMovie}
               favComp={RemoveFavourites}
+            />
+          </div>
+        </>
+      )}
+      {watchlist.length > 0 && (
+        <>
+          <div className="row d-flex align-items-center mt-4 mb-4">
+            <MovieListHeading heading="WatchList" />
+          </div>
+          <div className="row">
+            <WatchList
+              movies={watchlist}
+              handleWatchClick={RemoveWatchMovie}
+              watchComp={RemoveWatchList}
             />
           </div>
         </>
