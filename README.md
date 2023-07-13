@@ -2,7 +2,7 @@
 
 This app provides a comprehensive and user-friendly web application for browsing and discovering movies and series.
 
-#Features:
+# Features:
 
 Browse and Search: The app allows users to browse through a vast collection of movies. Additionally, users can utilize the search functionality to find specific movies by title.
 
