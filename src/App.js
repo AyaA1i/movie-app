@@ -331,7 +331,7 @@ const App = () => {
     getMovieRequest(SearchValue);
     const MovieFav = JSON.parse(localStorage.getItem("Favourites"));
     setFavourites(MovieFav);
-    const MovieList = JSON.parse(localStorage.getItem("Favourites"));
+    const MovieList = JSON.parse(localStorage.getItem("Watchlist"));
     setWatchlist(MovieList);
   }, [SearchValue]);
 
@@ -411,7 +411,7 @@ const App = () => {
       {watchlist.length > 0 && (
         <>
           <div className="row d-flex align-items-center mt-4 mb-4">
-            <MovieListHeading heading="WatchList" />
+            <MovieListHeading heading="Watchlist" />
           </div>
           <div className="row">
             <WatchList
