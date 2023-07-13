@@ -329,10 +329,14 @@ const App = () => {
 
   useEffect(() => {
     getMovieRequest(SearchValue);
-    const MovieFav = JSON.parse(localStorage.getItem("Favourites"));
-    setFavourites(MovieFav);
-    const MovieList = JSON.parse(localStorage.getItem("Watchlist"));
-    setWatchlist(MovieList);
+    if(localStorage.getItem("Favourites")!=null){
+      const MovieFav = JSON.parse(localStorage.getItem("Favourites"));
+      setFavourites(MovieFav);
+    }
+    if(localStorage.getItem("Watchlist")!=null){
+      const MovieList = JSON.parse(localStorage.getItem("Watchlist"));
+      setWatchlist(MovieList);
+    }
   }, [SearchValue]);
 
   const AddFavouriteMovie = (movie) => {
