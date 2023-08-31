@@ -329,11 +329,11 @@ const App = () => {
 
   useEffect(() => {
     getMovieRequest(SearchValue);
-    if(localStorage.getItem("Favourites")!=null){
+    if (localStorage.getItem("Favourites") != null) {
       const MovieFav = JSON.parse(localStorage.getItem("Favourites"));
       setFavourites(MovieFav);
     }
-    if(localStorage.getItem("Watchlist")!=null){
+    if (localStorage.getItem("Watchlist") != null) {
       const MovieList = JSON.parse(localStorage.getItem("Watchlist"));
       setWatchlist(MovieList);
     }
@@ -396,7 +396,7 @@ const App = () => {
           handleWatchClick={AddWatchMovie}
           favComp={AddFavourites}
           watchComp={AddWatchList}
-          />
+        />
       </div>
       {favourites && favourites.length > 0 && (
         <>

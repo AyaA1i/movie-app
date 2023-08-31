@@ -6,6 +6,7 @@ const MovieList = (data) => {
   const WatchListComponent = data.watchComp;
   const filteredMovies = data.movies.filter((movie) => movie.Poster !== "N/A");
   const [movieDetails, setMovieDetails] = useState({});
+  const [isLoading, setIsLoading] = useState(false); // Add loading state
 
   const fetchDetails = async (movie) => {
     const url = `http://www.omdbapi.com/?i=${movie.imdbID}&apikey=4e476b6f`;
@@ -23,6 +24,7 @@ const MovieList = (data) => {
         details[movie.imdbID] = response;
       }
       setMovieDetails(details);
+      setIsLoading(false); // Set loading state to false when data is loaded
     };
 
     getMovieDetails();
@@ -44,6 +46,7 @@ const MovieList = (data) => {
   const WatchClicked = (movie) => {
     data.handleWatchClick(movie);
   };
+
   return (
     <div className="d-flex ">
       {filteredMovies.map((movie, index) => {
@@ -58,14 +61,22 @@ const MovieList = (data) => {
             <img src={movie.Poster} alt="" />
             {hoveredIndex === index && (
               <div className="overlay">
-                <p className="movie-title">
-                  {details.Title} "{details.Type}"
-                </p>
-                <p className="movie-type">{details.Genre}</p>
-                <p className="movie-duration">Duration: {details.Runtime}</p>
-                <p className="movie-release">Release: {details.Released}</p>
-                <p className="description">{details.Plot}</p>
-                <p className="rate">Rate: {details.imdbRating}</p>
+                {isLoading ? (
+                  <div>Loading...</div>
+                ) : (
+                  <>
+                    <p className="movie-title">
+                      {details.Title} "{details.Type}"
+                    </p>
+                    <p className="movie-type">{details.Genre}</p>
+                    <p className="movie-duration">
+                      Duration: {details.Runtime}
+                    </p>
+                    <p className="movie-release">Release: {details.Released}</p>
+                    <p className="description">{details.Plot}</p>
+                    <p className="rate">Rate: {details.imdbRating}</p>
+                  </>
+                )}
                 <button className="FavButton" onClick={() => FavClicked(movie)}>
                   <FavouriteComponent />
                 </button>
